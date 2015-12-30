@@ -3,6 +3,7 @@ package uk.czcz.freespacefinder;
 public class CarPark {
 
     public final int id;
+    public final LastUpdateTimestamp lastUpdateTimestamp;
     public final String carparkName;
     public final double lattitude;
     public final double longitude;
@@ -11,9 +12,10 @@ public class CarPark {
     public final int predicted30Mins;
     public final int predicted60Mins;
 
-    public CarPark(int id, String carparkName, double lattitude, double longitude, int capacity, int spacesAvailable, int predicted30Mins, int predicted60Mins) {
+    public CarPark(int id, String carparkName, LastUpdateTimestamp lastUpdateTimestamp, double lattitude, double longitude, int capacity, int spacesAvailable, int predicted30Mins, int predicted60Mins) {
         this.id = id;
         this.carparkName = carparkName;
+        this.lastUpdateTimestamp = lastUpdateTimestamp;
         this.lattitude = lattitude;
         this.longitude = longitude;
         this.capacity = capacity;

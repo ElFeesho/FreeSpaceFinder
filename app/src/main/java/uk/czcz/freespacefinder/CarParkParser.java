@@ -56,11 +56,11 @@ public class CarParkParser {
                 JSONArray carParks = new JSONArray(jsonText);
                 for (int i = 0; i < carParks.length(); i++) {
                     JSONObject carParkObject = carParks.getJSONObject(i);
-                    carParkList.add(new CarPark(carParkObject.getInt("Id"), carParkObject.getString("Name"), carParkObject.getDouble("Latitude"), carParkObject.getDouble("Longitude"), carParkObject.getInt("Capacity"), carParkObject.getInt("SpacesNow"), carParkObject.getInt("PredictedSpaces30Mins"), carParkObject.getInt("PredictedSpaces60Mins")));
+                    carParkList.add(new CarPark(carParkObject.getInt("Id"), carParkObject.getString("Name"), new LastUpdateTimestamp(carParkObject.getString("LastUpdated")), carParkObject.getDouble("Latitude"), carParkObject.getDouble("Longitude"), carParkObject.getInt("Capacity"), carParkObject.getInt("SpacesNow"), carParkObject.getInt("PredictedSpaces30Mins"), carParkObject.getInt("PredictedSpaces60Mins")));
                 }
                 return carParkList;
             }
-        } catch (JSONException e) {
+        } catch (JSONException | LastUpdateTimestamp.LastUpdateTimestampException e) {
             throw new CarParkParserParseException();
         }
     }
