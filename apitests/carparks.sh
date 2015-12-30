@@ -14,5 +14,5 @@ fi
 DEVKEY=$1
 APPKEY=$2
 
-curl -H "DevKey: $DEVKEY" -H "AppKey: $APPKEY" "http://opendata.tfgm.com/api/Carparks?pageIndex=0&pageSize=20"
+curl -v -H "DevKey: $DEVKEY" -H "AppKey: $APPKEY" "http://opendata.tfgm.com/api/Carparks?pageIndex=0&pageSize=20"
 
