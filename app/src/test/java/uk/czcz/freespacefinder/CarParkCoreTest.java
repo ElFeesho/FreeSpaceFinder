@@ -17,6 +17,7 @@ public class CarParkCoreTest {
         public List<CarPark> carParksFetched_called;
         public boolean authorisationError_called;
         public boolean unknownError_called;
+        public boolean parseError_called;
 
         @Override
         public void noCarParksRetrieved()
@@ -37,6 +38,11 @@ public class CarParkCoreTest {
         @Override
         public void unknownError() {
             unknownError_called = true;
+        }
+
+        @Override
+        public void parseError() {
+            parseError_called = true;
         }
     }
 
@@ -74,6 +80,14 @@ public class CarParkCoreTest {
         @Override
         public void fetch(int pageNumber, Callback callback) {
             callback.unknownError();
+        }
+    }
+
+    private class ParseErrorCarParkFetcher implements CarParkCore.CarParkFetcher {
+
+        @Override
+        public void fetch(int pageNumber, Callback callback) {
+            callback.parseError();
         }
     }
 
@@ -128,5 +142,14 @@ public class CarParkCoreTest {
         SpyCarParkFetchCallback spyCarParkFetchCallback = new SpyCarParkFetchCallback();
         carParkCore.fetchCarParks(0, spyCarParkFetchCallback);
         assertThat(true, is(spyCarParkFetchCallback.unknownError_called));
+    }
+
+    @Test
+    public void whenThereIsAnParseErrorFetchingACarParkList_theCallbackGivenToTheCarParkCoreIsNotified()
+    {
+        CarParkCore carParkCore = new CarParkCore(new ParseErrorCarParkFetcher());
+        SpyCarParkFetchCallback spyCarParkFetchCallback = new SpyCarParkFetchCallback();
+        carParkCore.fetchCarParks(0, spyCarParkFetchCallback);
+        assertThat(true, is(spyCarParkFetchCallback.parseError_called));
     }
 }
