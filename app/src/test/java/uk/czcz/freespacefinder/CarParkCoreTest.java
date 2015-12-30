@@ -15,6 +15,7 @@ public class CarParkCoreTest {
 
         public boolean noCarParksRetrieved_called;
         public List<CarPark> carParksFetched_called;
+        public boolean authorisationError_called;
 
         @Override
         public void noCarParksRetrieved()
@@ -25,6 +26,11 @@ public class CarParkCoreTest {
         @Override
         public void carParksFetched(List<CarPark> carParks) {
             carParksFetched_called = carParks;
+        }
+
+        @Override
+        public void authorisationError() {
+            authorisationError_called = true;
         }
     }
 
@@ -47,6 +53,14 @@ public class CarParkCoreTest {
         @Override
         public void fetch(int pageNumber, Callback callback) {
             callback.carParksRetrieved(carParksToRetrievePages[pageNumber]);
+        }
+    }
+
+    private class AuthorisationErrorCarParkFetcher implements CarParkCore.CarParkFetcher {
+
+        @Override
+        public void fetch(int pageNumber, Callback callback) {
+            callback.authorisationError();
         }
     }
 
@@ -83,5 +97,14 @@ public class CarParkCoreTest {
         assertThat(spyCarParkFetchCallback.carParksFetched_called, hasItem(expectedCarPark));
         carParkCore.fetchCarParks(1, spyCarParkFetchCallback);
         assertThat(spyCarParkFetchCallback.carParksFetched_called, hasItem(expectedCarParkTwo));
+    }
+
+    @Test
+    public void whenThereIsAnAuthorisationErrorFetchingACarParkList_theCallbackGivenToTheCarParkCoreIsNotified()
+    {
+        CarParkCore carParkCore = new CarParkCore(new AuthorisationErrorCarParkFetcher());
+        SpyCarParkFetchCallback spyCarParkFetchCallback = new SpyCarParkFetchCallback();
+        carParkCore.fetchCarParks(0, spyCarParkFetchCallback);
+        assertThat(true, is(spyCarParkFetchCallback.authorisationError_called));
     }
 }
