@@ -28,3 +28,5 @@ proguard/
 .idea
 FreeSpaceFinder.iml
 gradle
+tfgmkeys/app_key
+tfgmkeys/dev_key
