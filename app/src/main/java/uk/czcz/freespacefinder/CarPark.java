@@ -5,6 +5,7 @@ public class CarPark {
     public final int id;
     public final LastUpdateTimestamp lastUpdateTimestamp;
     public final String carparkName;
+    public final String state;
     public final double lattitude;
     public final double longitude;
     public final int capacity;
@@ -12,9 +13,10 @@ public class CarPark {
     public final int predicted30Mins;
     public final int predicted60Mins;
 
-    public CarPark(int id, String carparkName, LastUpdateTimestamp lastUpdateTimestamp, double lattitude, double longitude, int capacity, int spacesAvailable, int predicted30Mins, int predicted60Mins) {
+    public CarPark(int id, String carparkName, String state, LastUpdateTimestamp lastUpdateTimestamp, double lattitude, double longitude, int capacity, int spacesAvailable, int predicted30Mins, int predicted60Mins) {
         this.id = id;
         this.carparkName = carparkName;
+        this.state = state;
         this.lastUpdateTimestamp = lastUpdateTimestamp;
         this.lattitude = lattitude;
         this.longitude = longitude;
@@ -38,7 +40,7 @@ public class CarPark {
         if (spacesAvailable != carPark.spacesAvailable) return false;
         if (predicted30Mins != carPark.predicted30Mins) return false;
         if (predicted60Mins != carPark.predicted60Mins) return false;
-        return carparkName.equals(carPark.carparkName);
+        return carparkName.equals(carPark.carparkName) && state.equals(carPark.state);
     }
 
     @Override

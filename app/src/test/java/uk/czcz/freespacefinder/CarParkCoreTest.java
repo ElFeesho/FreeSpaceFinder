@@ -104,7 +104,7 @@ public class CarParkCoreTest {
 
     @Test
     public void theCarParkCoreWillNotifyACallbackWhenCarParksAreRetrieved() throws LastUpdateTimestamp.LastUpdateTimestampException {
-        CarPark expectedCarPark = new CarPark(1, "Name", new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 10, 5, 2, 1);
+        CarPark expectedCarPark = new CarPark(1, "Name", "State", new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 10, 5, 2, 1);
         CarParkCore carParkCore = new CarParkCore(new FakeCarParkFetcher(Arrays.asList(expectedCarPark)));
 
         SpyCarParkFetchCallback spyCarParkFetchCallback = new SpyCarParkFetchCallback();
@@ -115,8 +115,8 @@ public class CarParkCoreTest {
 
     @Test
     public void theCarParkCoreWillNotifyACallbackWhenCarParksAreRetrievedForDifferentPages() throws LastUpdateTimestamp.LastUpdateTimestampException {
-        CarPark expectedCarPark = new CarPark(1, "Name", new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 10, 5, 2, 1);
-        CarPark expectedCarParkTwo = new CarPark(2, "Name", new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 10, 5, 2, 1);
+        CarPark expectedCarPark = new CarPark(1, "Name", "State", new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 10, 5, 2, 1);
+        CarPark expectedCarParkTwo = new CarPark(2, "Name", "State", new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 10, 5, 2, 1);
         CarParkCore carParkCore = new CarParkCore(new FakeCarParkFetcher(Arrays.asList(expectedCarPark), Arrays.asList(expectedCarParkTwo)));
 
         SpyCarParkFetchCallback spyCarParkFetchCallback = new SpyCarParkFetchCallback();

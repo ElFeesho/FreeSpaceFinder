@@ -68,7 +68,11 @@ public class CarParkListFragment extends Fragment {
         carParkListView.setLayoutManager(new LinearLayoutManager(getContext()));
         carParkListView.setAdapter(carParkListAdapter);
 
-        FreeSpaceFinderApplication.getCarParkCore(getActivity()).fetchCarParks(0, new CarParkCore.CarParkFetchCallback() {
+        fetchCarParks(0);
+    }
+
+    private void fetchCarParks(final int pageNumber) {
+        FreeSpaceFinderApplication.getCarParkCore(getActivity()).fetchCarParks(pageNumber, new CarParkCore.CarParkFetchCallback() {
             @Override
             public void noCarParksRetrieved() {
 
@@ -77,6 +81,7 @@ public class CarParkListFragment extends Fragment {
             @Override
             public void carParksFetched(List<CarPark> carParks) {
                 carParkListAdapter.addCarParks(carParks);
+                fetchCarParks(pageNumber+1);
             }
 
             @Override

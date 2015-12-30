@@ -43,15 +43,16 @@ public class CarParkParserTest {
         String expectedLastUpdate = "2015-12-30T12:00:00";
         double expectedLattitude = 53.0000000000000;
         double expectedLongitude = -2.0000000000000;
+        String state = "Spaces";
         int expectedCapacity = 100;
         int expectedSpacesAvailable = 80;
         int expectedPredicted30Mins = 60;
         int expectedPredicted60Mins = 30;
         LastUpdateTimestamp lastUpdateTimestamp = new LastUpdateTimestamp(expectedLastUpdate);
 
-        CarPark expectedCarPark = new CarPark(expectedId, expectedCarparkName, lastUpdateTimestamp, expectedLattitude, expectedLongitude, expectedCapacity, expectedSpacesAvailable, expectedPredicted30Mins, expectedPredicted60Mins);
+        CarPark expectedCarPark = new CarPark(expectedId, expectedCarparkName, state, lastUpdateTimestamp, expectedLattitude, expectedLongitude, expectedCapacity, expectedSpacesAvailable, expectedPredicted30Mins, expectedPredicted60Mins);
 
-        List<CarPark> carParks = parser.parse(testResourceStream("[{ \"Id\": " + expectedId + ", \"Name\": \"" + expectedCarparkName + "\", \"State\": \"Spaces\", \"LastUpdated\": \"" + expectedLastUpdate + "\", \"Latitude\": " + expectedLattitude + ", \"Longitude\": " + expectedLongitude + ", \"SCN\": \"ignored\", \"Capacity\": " + expectedCapacity + ", \"SpacesNow\": " + expectedSpacesAvailable + ", \"PredictedSpaces30Mins\": " + expectedPredicted30Mins + ", \"PredictedSpaces60Mins\": " + expectedPredicted60Mins + "}]"));
+        List<CarPark> carParks = parser.parse(testResourceStream("[{ \"Id\": " + expectedId + ", \"Name\": \"" + expectedCarparkName + "\", \"State\": \"" + state + "\", \"LastUpdated\": \"" + expectedLastUpdate + "\", \"Latitude\": " + expectedLattitude + ", \"Longitude\": " + expectedLongitude + ", \"SCN\": \"ignored\", \"Capacity\": " + expectedCapacity + ", \"SpacesNow\": " + expectedSpacesAvailable + ", \"PredictedSpaces30Mins\": " + expectedPredicted30Mins + ", \"PredictedSpaces60Mins\": " + expectedPredicted60Mins + "}]"));
 
         assertThat(expectedCarPark, is(carParks.get(0)));
     }
