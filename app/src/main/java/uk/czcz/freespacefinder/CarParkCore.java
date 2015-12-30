@@ -11,6 +11,7 @@ public class CarParkCore {
             void noCarParksRetreieved();
             void carParksRetrieved(List<CarPark> carParks);
             void authorisationError();
+            void unknownError();
         }
 
         void fetch(int pageNumber, Callback callback);
@@ -21,6 +22,7 @@ public class CarParkCore {
         void noCarParksRetrieved();
         void carParksFetched(List<CarPark> carParks);
         void authorisationError();
+        void unknownError();
     }
 
     private final CarParkFetcher carParkFetcher;
@@ -44,6 +46,11 @@ public class CarParkCore {
             @Override
             public void authorisationError() {
                 fetchCallback.authorisationError();
+            }
+
+            @Override
+            public void unknownError() {
+                fetchCallback.unknownError();
             }
         });
     }
