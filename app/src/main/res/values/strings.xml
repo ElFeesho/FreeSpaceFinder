@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Free Space Finder</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="status_list">
+        <item>Unknown Status</item>
+        <item>Almost Full</item>
+        <item>Closed</item>
+        <item>Estimated</item>
+        <item>Full</item>
+        <item>Open</item>
+        <item>Queuing</item>
+        <item>Spaces</item>
+    </string-array>
 </resources>

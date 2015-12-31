@@ -4,6 +4,16 @@ import java.util.List;
 
 public class CarParkCore {
 
+    public interface LocationProvider
+    {
+        interface Callback
+        {
+            void locationAvailable(Location location);
+        }
+
+        void fetchLocation(Callback location);
+    }
+
     public interface CarParkFetcher
     {
         interface Callback
@@ -27,10 +37,16 @@ public class CarParkCore {
         void parseError();
     }
 
-    private final CarParkFetcher carParkFetcher;
+    public interface LocationFetchCallback {
+        void locationFetched(Location location);
+    }
 
-    public CarParkCore(CarParkFetcher carParkFetcher) {
+    private final CarParkFetcher carParkFetcher;
+    private final LocationProvider locationProvider;
+
+    public CarParkCore(CarParkFetcher carParkFetcher, LocationProvider locationProvider) {
         this.carParkFetcher = carParkFetcher;
+        this.locationProvider = locationProvider;
     }
 
     public void fetchCarParks(int pageNumber, final CarParkFetchCallback fetchCallback) {
@@ -58,6 +74,16 @@ public class CarParkCore {
             @Override
             public void parseError() {
                 fetchCallback.parseError();
+            }
+        });
+    }
+
+    public void fetchLocation(final LocationFetchCallback locationFetchCallback)
+    {
+        locationProvider.fetchLocation(new LocationProvider.Callback() {
+            @Override
+            public void locationAvailable(Location location) {
+                locationFetchCallback.locationFetched(location);
             }
         });
     }

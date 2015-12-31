@@ -12,54 +12,111 @@
         android:layout_margin="12dp"
         android:elevation="5dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/carpark_name"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/last_update"
                 android:fontFamily="sans-serif"
                 android:padding="8dp"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 tools:text="MEN"/>
 
+            <TextView
+                android:id="@+id/last_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableLeft="@drawable/ic_last_update_time"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:padding="8dp"
+                tools:text="Woop"/>
+
+            <TextView
+                android:id="@+id/carpark_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/carpark_name"
+                android:fontFamily="sans-serif"
+                android:padding="8dp"
+                android:textAllCaps="true"
+                tools:text="Spaces"/>
+            <TextView
+                android:id="@+id/carpark_distance"
+                android:layout_width="0dp"
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/carpark_state"
+                android:layout_toLeftOf="@+id/navigate_to_carpark"
+                android:fontFamily="sans-serif"
+                android:padding="8dp"
+                android:textAllCaps="true"
+                tools:text="Distance"/>
+
+            <TextView
+                android:id="@+id/navigate_to_carpark"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="?selectableItemBackground"
+                android:drawablePadding="4dp"
+                android:drawableLeft="@drawable/ic_location"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/carpark_state"
+                android:fontFamily="sans-serif"
+                android:padding="8dp"
+                android:textAllCaps="true"
+                android:text="Directions"/>
+
             <View
+                android:id="@+id/separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_below="@+id/navigate_to_carpark"
                 android:background="#ccc"
                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/separator"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/spaces_available"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_weight="1"
                     android:fontFamily="sans-serif"
+                    android:gravity="center"
                     android:padding="8dp"
                     tools:text="100"/>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="#ccc"
                     />
+
                 <TextView
                     android:id="@+id/spaces_available_30mins"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_weight="1"
                     android:fontFamily="sans-serif"
+                    android:gravity="center"
                     android:padding="8dp"
                     tools:text="100"/>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -69,13 +126,13 @@
                 <TextView
                     android:id="@+id/spaces_available_60mins"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_weight="1"
                     android:fontFamily="sans-serif"
+                    android:gravity="center"
                     android:padding="8dp"
                     tools:text="100"/>
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 </uk.czcz.freespacefinder.CarParkView>

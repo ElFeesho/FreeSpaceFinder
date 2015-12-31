@@ -12,7 +12,7 @@ public class FreeSpaceFinderApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        carParkCore = new AppRoot().getCarParkCore();
+        carParkCore = new AppRoot(this).getCarParkCore();
     }
 
     public static CarParkCore getCarParkCore(Context context)
