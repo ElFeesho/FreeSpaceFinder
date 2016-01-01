@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -59,11 +60,17 @@ public class CarParkListFragment extends Fragment {
             carParkList.addAll(carParks);
             notifyDataSetChanged();
         }
+
+        public void clear() {
+            carParkList.clear();
+            notifyDataSetChanged();
+        }
     }
 
     public static String TAG = "CPLF";
     private RecyclerView carParkListView;
     private CarParkRecyclerViewListAdapter carParkListAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -75,6 +82,15 @@ public class CarParkListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                fetchCarParks(0);
+            }
+        });
         carParkListAdapter = new CarParkRecyclerViewListAdapter(new DirectionsDelegate() {
             @Override
             public void directionsForCarPark(CarPark carPark) {
@@ -97,10 +113,14 @@ public class CarParkListFragment extends Fragment {
     }
 
     private void fetchCarParks(final int pageNumber) {
+        if (pageNumber == 0)
+        {
+            carParkListAdapter.clear();
+        }
         FreeSpaceFinderApplication.getCarParkCore(getActivity()).fetchCarParks(pageNumber, new CarParkCore.CarParkFetchCallback() {
             @Override
             public void noCarParksRetrieved() {
-
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -111,17 +131,17 @@ public class CarParkListFragment extends Fragment {
 
             @Override
             public void authorisationError() {
-
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void unknownError() {
-
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void parseError() {
-
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
