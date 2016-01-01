@@ -33,8 +33,7 @@ public class CarPark {
     public final LastUpdateTimestamp lastUpdateTimestamp;
     public final String carparkName;
     public final int state;
-    public final double lattitude;
-    public final double longitude;
+    public final Location location;
     public final int capacity;
     public final int spacesAvailable;
     public final int predicted30Mins;
@@ -45,8 +44,7 @@ public class CarPark {
         this.carparkName = carparkName;
         this.state = statusMap.get(state);
         this.lastUpdateTimestamp = lastUpdateTimestamp;
-        this.lattitude = lattitude;
-        this.longitude = longitude;
+        this.location = new Location(lattitude, longitude);
         this.capacity = capacity;
         this.spacesAvailable = spacesAvailable;
         this.predicted30Mins = predicted30Mins;
@@ -61,8 +59,8 @@ public class CarPark {
         CarPark carPark = (CarPark) o;
 
         if (id != carPark.id) return false;
-        if (Double.compare(carPark.lattitude, lattitude) != 0) return false;
-        if (Double.compare(carPark.longitude, longitude) != 0) return false;
+        if (Double.compare(carPark.location.latitude, location.latitude) != 0) return false;
+        if (Double.compare(carPark.location.longitude, location.longitude) != 0) return false;
         if (capacity != carPark.capacity) return false;
         if (spacesAvailable != carPark.spacesAvailable) return false;
         if (predicted30Mins != carPark.predicted30Mins) return false;
@@ -76,9 +74,9 @@ public class CarPark {
         long temp;
         result = id;
         result = 31 * result + carparkName.hashCode();
-        temp = Double.doubleToLongBits(lattitude);
+        temp = Double.doubleToLongBits(location.latitude);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(longitude);
+        temp = Double.doubleToLongBits(location.longitude);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + capacity;
         result = 31 * result + spacesAvailable;

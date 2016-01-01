@@ -3,7 +3,9 @@ package uk.co.czcz.freespacefinder;
 import android.app.Application;
 import android.content.Context;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -30,10 +32,43 @@ public class AppRoot {
         }
 
         @Override
-        public void fetchLocation(Callback location) {
+        public void fetchLocation(final Callback callback) {
             try {
-                Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-                location.locationAvailable(new uk.czcz.freespacefinder.Location(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
+                final Location lastKnownLocation = locationProvider.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+                if (lastKnownLocation == null)
+                {
+                    locationProvider.requestLocationUpdates(LocationManager.PASSIVE_PROVIDER, 0, 0, new LocationListener() {
+                        @Override
+                        public void onLocationChanged(Location location) {
+                            try {
+                                locationProvider.removeUpdates(this);
+                                callback.locationAvailable(new uk.czcz.freespacefinder.Location(location.getLatitude(), location.getLongitude()));
+                            }
+                            catch(SecurityException e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                        }
+
+                        @Override
+                        public void onProviderEnabled(String provider) {
+
+                        }
+
+                        @Override
+                        public void onProviderDisabled(String provider) {
+
+                        }
+                    });
+                }
+                else {
+                    callback.locationAvailable(new uk.czcz.freespacefinder.Location(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()));
+                }
             }
             catch(SecurityException e)
             {

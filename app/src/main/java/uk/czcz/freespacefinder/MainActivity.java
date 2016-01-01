@@ -1,6 +1,10 @@
 package uk.czcz.freespacefinder;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -33,10 +37,29 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
+        else
+        {
+            displayCarParks();
+        }
+    }
+
+    private void displayCarParks() {
         if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) == null)
         {
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CarParkListFragment(), CarParkListFragment.TAG).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new CarParkListFragment(), CarParkListFragment.TAG).commitAllowingStateLoss();
         }
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        {
+            displayCarParks();
+        }
     }
 }

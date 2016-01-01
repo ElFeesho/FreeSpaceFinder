@@ -80,7 +80,7 @@ public class CarParkListFragment extends Fragment {
             public void directionsForCarPark(CarPark carPark) {
                 try
                 {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q="+carPark.lattitude+","+carPark.longitude)));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q="+carPark.location.latitude+","+carPark.location.longitude)));
                 }
                 catch(ActivityNotFoundException e)
                 {

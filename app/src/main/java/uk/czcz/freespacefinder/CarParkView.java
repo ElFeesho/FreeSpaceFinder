@@ -5,16 +5,12 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
 
 public class CarParkView extends FrameLayout {
-
-    public interface Listener
-    {
-        void directionsClicked(CarPark forCarPark);
-    }
 
     private TextView carParkName;
     private TextView carParkState;
@@ -24,6 +20,8 @@ public class CarParkView extends FrameLayout {
     private TextView lastUpdated;
     private TextView distance;
     private DirectionsDelegate listener;
+    private TextView totalSpaces;
+    private ProgressBar spacesProgressBar;
 
     public CarParkView(Context context) {
         this(context, null);
@@ -38,11 +36,13 @@ public class CarParkView extends FrameLayout {
         super.onFinishInflate();
         carParkName = (TextView)findViewById(R.id.carpark_name);
         carParkState = (TextView)findViewById(R.id.carpark_state);
+        totalSpaces = (TextView) findViewById(R.id.spaces_total);
         spacesAvailable = (TextView) findViewById(R.id.spaces_available);
         spacesAvailable30mins = (TextView) findViewById(R.id.spaces_available_30mins);
         spacesAvailable60mins = (TextView) findViewById(R.id.spaces_available_60mins);
         distance = (TextView) findViewById(R.id.carpark_distance);
         lastUpdated = (TextView) findViewById(R.id.last_update);
+        spacesProgressBar = (ProgressBar) findViewById(R.id.spaces_progress_bar);
     }
 
     public void displayCarPark(final CarPark carPark)
@@ -52,13 +52,22 @@ public class CarParkView extends FrameLayout {
         spacesAvailable.setText(carPark.spacesAvailable + "");
         spacesAvailable30mins.setText(carPark.predicted30Mins+"");
         spacesAvailable60mins.setText(carPark.predicted60Mins+"");
-
+        totalSpaces.setText(carPark.capacity+"");
         lastUpdated.setText(formatTimestamp(carPark));
+
+        spacesProgressBar.setMax(carPark.capacity);
+        spacesProgressBar.setProgress(carPark.capacity-carPark.spacesAvailable);
 
         findViewById(R.id.navigate_to_carpark).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.directionsForCarPark(carPark);
+            }
+        });
+        FreeSpaceFinderApplication.getCarParkCore(getContext()).fetchLocation(new CarParkCore.LocationFetchCallback() {
+            @Override
+            public void locationFetched(Location location) {
+                distance.setText(String.format("%.2f km", location.distance(carPark.location)));
             }
         });
     }

@@ -64,13 +64,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/network/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/network/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/network/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/jni" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestNetwork/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestNetwork/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestNetwork/assets" type="java-test-resource" />
@@ -78,6 +71,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestNetwork/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestNetwork/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTestNetwork/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testNetwork/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
