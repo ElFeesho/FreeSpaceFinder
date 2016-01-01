@@ -25,7 +25,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     public void testWhenAListOfCarParksAreFetched_theyAreDisplayed() throws LastUpdateTimestamp.LastUpdateTimestampException {
-        HardcodedData.carParkList.add(Arrays.asList(new CarPark(1, "Car Park One", state, new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 100, 50, 30, 10)));
+        HardcodedData.carParkList.add(Arrays.asList(new CarPark(1, "Car Park One", "SPACES", new LastUpdateTimestamp("2015-12-30T15:12:15"), 53, -2, 100, 50, 30, 10)));
 
         solo = new Solo(getInstrumentation(), getActivity());
         assertTrue(solo.waitForFragmentByTag(CarParkListFragment.TAG));

@@ -22,6 +22,7 @@ public class CarParkView extends FrameLayout {
     private DirectionsDelegate listener;
     private TextView totalSpaces;
     private ProgressBar spacesProgressBar;
+    private ProfileImageView image;
 
     public CarParkView(Context context) {
         this(context, null);
@@ -43,6 +44,7 @@ public class CarParkView extends FrameLayout {
         distance = (TextView) findViewById(R.id.carpark_distance);
         lastUpdated = (TextView) findViewById(R.id.last_update);
         spacesProgressBar = (ProgressBar) findViewById(R.id.spaces_progress_bar);
+        image = (ProfileImageView) findViewById(R.id.image);
     }
 
     public void displayCarPark(final CarPark carPark)
@@ -70,6 +72,53 @@ public class CarParkView extends FrameLayout {
                 distance.setText(String.format("%.2f km", location.distance(carPark.location)));
             }
         });
+
+        if (carPark.id == 21905)
+        {
+            image.setImageResource(R.mipmap.aquatics_centre);
+            image.updateBlur();
+        }
+        else if (carPark.id == 21906)
+        {
+            image.setImageResource(R.mipmap.men);
+            image.updateBlur();
+        }
+        else if (carPark.id == 21907)
+        {
+            image.setImageResource(R.mipmap.arndale);
+            image.updateBlur();
+        }
+        else if (carPark.id == 21908)
+        {
+            image.setImageResource(R.mipmap.bridgewater);
+            image.updateBlur();
+        }
+        else if (carPark.id == 21909)
+        {
+            image.setImageResource(R.mipmap.charles_street);
+            image.updateBlur();
+        }
+        else if (carPark.id == 21911)
+        {
+            image.setImageResource(R.mipmap.chortlon_street);
+            image.updateBlur();
+        }
+        else if (carPark.id == 21912)
+        {
+            image.setImageResource(R.mipmap.church_street);
+            image.updateBlur();
+        }
+        else if (carPark.id == 21913)
+        {
+            image.setImageResource(R.mipmap.dale_street);
+            image.updateBlur();
+        }
+        else
+        {
+            image.setImageResource(R.mipmap.placeholder);
+            image.updateBlur();
+        }
+
     }
 
     public void setDirectionsDelegate(DirectionsDelegate listener) {

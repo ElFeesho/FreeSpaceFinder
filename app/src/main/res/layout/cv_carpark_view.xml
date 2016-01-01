@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -17,12 +18,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <uk.czcz.freespacefinder.ProfileImageView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="matrix"
+                app:scaleFactor="4"
+                app:blurRadius="4"
+                android:id="@+id/image"
+                tools:src="@mipmap/men"/>
+
             <TextView
                 android:id="@+id/carpark_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:layout_alignBottom="@+id/image"
                 android:layout_toLeftOf="@+id/last_update"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:shadowColor="#333"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="16"
                 android:fontFamily="sans-serif"
                 android:padding="8dp"
                 android:textAllCaps="true"
@@ -31,6 +48,7 @@
 
             <TextView
                 android:id="@+id/last_update"
+                android:layout_below="@+id/image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -38,7 +56,7 @@
                 android:drawablePadding="4dp"
                 android:gravity="center"
                 android:padding="8dp"
-                tools:text="Woop"/>
+                tools:text="5 mins"/>
 
             <TextView
                 android:id="@+id/carpark_state"
@@ -92,7 +110,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/separator"
                 android:orientation="horizontal">
-
 
                 <LinearLayout
                     android:layout_width="0dp"
