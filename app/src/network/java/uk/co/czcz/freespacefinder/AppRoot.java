@@ -88,6 +88,7 @@ public class AppRoot {
                         HttpURLConnection urlConnection = (HttpURLConnection) new URL("http://opendata.tfgm.com/api/Carparks?pageIndex=" + pageNumber + "&pageSize=20").openConnection();
                         urlConnection.addRequestProperty("AppKey", BuildConfig.TFGM_APP_KEY);
                         urlConnection.addRequestProperty("DevKey", BuildConfig.TFGM_DEV_KEY);
+                        urlConnection.addRequestProperty("Cache-Control", "max-age=0");
                         urlConnection.connect();
                         CarParkParser parser = new CarParkParser();
                         try {
