@@ -53,6 +53,7 @@ public class ProfileImageView extends ImageView {
 
 
     public void blurImage(Drawable drawable) {
+        updateMatrix();
         Bitmap bm = Bitmap.createBitmap(drawable.getIntrinsicWidth()/ scaleFactor, drawable.getIntrinsicHeight()/ scaleFactor, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bm);
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth()/ scaleFactor, drawable.getIntrinsicHeight()/ scaleFactor);
@@ -85,17 +86,19 @@ public class ProfileImageView extends ImageView {
 
     public void updateBlur()
     {
-        Matrix matrix = new Matrix();
-        float sx = (getMeasuredWidth() / (float) (getDrawable().getIntrinsicWidth()/ scaleFactor));
-        matrix.setScale(sx, sx);
-        matrix.postTranslate(0, (getMeasuredHeight() - (getDrawable().getIntrinsicHeight()/ scaleFactor) * sx) / 2);
-        setImageMatrix(matrix);
+        updateMatrix();
         if (blurRadius >= 0.1f) {
             blurImage(getDrawable());
         }
     }
 
-
+    private void updateMatrix() {
+        Matrix matrix = new Matrix();
+        float sx = (getMeasuredWidth() / (float) (getDrawable().getIntrinsicWidth()/ scaleFactor));
+        matrix.setScale(sx, sx);
+        matrix.postTranslate(0, (getMeasuredHeight() - (getDrawable().getIntrinsicHeight()/ scaleFactor) * sx) / 2);
+        setImageMatrix(matrix);
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
