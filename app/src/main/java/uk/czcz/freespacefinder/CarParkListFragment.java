@@ -132,16 +132,19 @@ public class CarParkListFragment extends Fragment {
             @Override
             public void authorisationError() {
                 swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getActivity(), "APP or DEV key are invalid.", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void unknownError() {
                 swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getActivity(), "Unknown error occurred.", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void parseError() {
                 swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getActivity(), "Failed to retrieve data. Check network.", Toast.LENGTH_LONG).show();
             }
         });
     }
